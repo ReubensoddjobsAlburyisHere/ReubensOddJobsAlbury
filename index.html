@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reuben's Odd Jobs | Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>emailjs.init("o3QSOU-w9DtvwwLIO");</script>
+  <style>
+    body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; }
+    main.container { max-width: 900px; margin: auto; padding: 2rem; }
+    section { margin-bottom: 4rem; }
+    input, select, textarea, button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #444;
+    }
+    .slogan { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; text-align: center; }
+    nav a { margin: 0.5rem; display: inline-block; }
+    #toTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .error { color: red; display: none; margin-top: 0.5rem; }
+    .success { color: lightgreen; display: none; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+<main class="container">
+  <h1>Reuben's Odd Jobs</h1>
+  <p class="slogan">“No job too odd — Reuben gets it done!”</p>
+
+  <nav>
+    <a href="#booking" role="button">📅 Book a Job</a>
+    <a href="#reviews" role="button">⭐ Leave a Review</a>
+    <a href="#faq" role="button">❓ FAQ</a>
+    <a href="#login" role="button">🔐 Login / Create Account</a>
+    <a href="#staff" role="button">🔑 Staff Login Only</a>
+  </nav>
+
+  <section id="booking">
+    <h2>📅 Book a Job</h2>
+    <form onsubmit="return checkBan('facebookBooking', 'bookingBanMsg')">
+      <select required>
+        <option value="">Where are you located?</option>
+        <option>Albury</option><option>East Albury</option><option>Lavington</option>
+        <option>North Albury</option><option>South Albury</option><option>Springdale Heights</option><option>Thurgoona</option><option>West Albury</option>
+      </select>
+      <input type="text" placeholder="Street Address" required />
+      <label><input type="checkbox" /> 💻 Technology Help</label>
+      <label><input type="checkbox" /> 🧼 Cleaning</label>
+      <label><input type="checkbox" /> 🎉 Party Help</label>
+      <label><input type="checkbox" /> 🛒 Errands</label>
+      <input type="text" id="facebookBooking" placeholder="Facebook Username" required />
+      <textarea placeholder="Tell Reuben more..."></textarea>
+      <button type="submit">Send Booking Request</button>
+      <p class="error" id="bookingBanMsg"></p>
+    </form>
+  </section>
+
+  <section id="reviews">
+    <h2>⭐ Leave a Review</h2>
+    <form onsubmit="return checkBan('reviewUser', 'reviewBanMsg')">
+      <input type="text" id="reviewUser" placeholder="Your Name or Facebook Username" required />
+      <select required>
+        <option value="">Rating</option>
+        <option>★★★★★</option>
+        <option>★★★★</option>
+        <option>★★★</option>
+      </select>
+      <textarea placeholder="Write your review..." required></textarea>
+      <button type="submit">Submit Review</button>
+      <p class="error" id="reviewBanMsg"></p>
+    </form>
+  </section>
+
+  <section id="faq">
+    <h2>❓ Frequently Asked Questions</h2>
+    <ul>
+      <li>📨 What happens after booking? → Reuben will message you on Messenger.</li>
+      <li>⏱️ When will Reuben contact me? → Same day or within 2 days.</li>
+      <li>📍 What areas are covered? → Albury & Lavington (and surrounding).</li>
+      <li>📝 What if my job isn’t listed? → Use the "Tell Reuben more" box.</li>
+    </ul>
+  </section>
+
+  <section id="login">
+    <h2>🔐 Login / Create Account</h2>
+    <button onclick="window.location.href='https://designergpt.replit.app/pages/60189c80e482665673af1aaca565ef6e.html'">Open Login/Create</button>
+  </section>
+
+  <section id="staff">
+    <h2>🔑 Staff Login Only</h2>
+    <button onclick="window.location.href='https://designergpt.replit.app/pages/a145225211ee14c6faed2971f6c1b642.html'">Open Staff Panel</button>
+  </section>
+</main>
+
+<button onclick="topFunction()" id="toTopBtn">↑ Top</button>
+
+<script>
+  const banned = JSON.parse(localStorage.getItem("banned_users") || "[]");
+
+  function checkBan(id, msgId) {
+    const input = document.getElementById(id);
+    const user = input ? input.value.trim() : "";
+    const ban = banned.find(b => b.id === user);
+    const msg = document.getElementById(msgId);
+
+    if (ban) {
+      const now = Date.now();
+      if (!ban.bannedUntil || now < ban.bannedUntil) {
+        const until = ban.bannedUntil ? new Date(ban.bannedUntil).toLocaleString() : "Forever";
+        msg.innerText = `🚫 You are banned until ${until}. Reason: ${ban.reason}`;
+        msg.style.display = "block";
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const btn = document.getElementById("toTopBtn");
+  window.onscroll = () => {
+    btn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+  };
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+</body>
+</html>
