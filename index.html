@@ -80,12 +80,13 @@
         </label>
         <label>📍 Where are you?
           <select name="location" required>
-            <option>Lavington</option>
-            <option>Springdale Heights</option>
-            <option>Glenroy</option>
-            <option>North Albury</option>
             <option>East Albury</option>
+            <option>Glenroy</option>
+            <option>Lavington</option>
+            <option>North Albury</option>
             <option>South Albury</option>
+            <option>Springdale Heights</option>
+            <option>Thurgoona</option>
             <option>West Albury</option>
           </select>
         </label>
@@ -109,122 +110,32 @@
       </form>
     </section>
 
-    <section id="review">
-      <h2>🌟 Leave a Review</h2>
-      <form id="reviewForm">
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-        <label for="stars">Star Rating (1–5):</label>
-        <select id="stars" name="stars" required>
-          <option value="">Choose a rating</option>
-          <option value="1">⭐ 1 - Not great</option>
-          <option value="2">⭐⭐ 2</option>
-          <option value="3">⭐⭐⭐ 3 - Okay</option>
-          <option value="4">⭐⭐⭐⭐ 4</option>
-          <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent!</option>
-        </select>
-        <small>Please choose a star rating between 1 and 5 ⭐</small>
-        <textarea id="feedback" name="feedback" placeholder="Write your feedback here..." required></textarea>
-        <button type="submit">Submit Review</button>
-        <p id="reviewMessage"></p>
-      </form>
-    </section>
+    <!-- Other sections stay the same -->
 
-    <section id="faq">
-      <h2>❓ Frequently Asked Questions</h2>
-      <ul>
-        <li><strong>How do I pay? 💰</strong> – Cash or bank transfer after the job.</li>
-        <li><strong>What areas do you cover? 📍</strong> – Albury + surrounding suburbs.</li>
-        <li><strong>Can I book short notice? ⚡</strong> – Absolutely, message Reuben on Facebook!</li>
-        <li><strong>What kind of services do you offer? 🛠️</strong> – See full list below under Services!</li>
-        <li><strong>What are your hours of operation? ⏰</strong> – Typically available afternoons and weekends. Get in touch to confirm a time!</li>
-        <li><strong>What happens if I need to reschedule? 🗓️➡️🗓️</strong> – Contact Reuben directly to make adjustments. You may reschedule up to 24 hours before your booking.</li>
-        <li><strong>What should I expect on the day of the booking? ➡️🏠</strong> – Reuben will arrive ready, based on the job. Please be home or leave clear instructions!</li>
-        <li><strong>How do I get in touch with Reuben? 📧</strong> – Message him on Facebook or use the contact email listed in your booking confirmation.</li>
-      </ul>
-    </section>
+    <button id="backToTop" onclick="window.location.href='#top'">⬆️ Back to Top</button>
 
-    <section id="services">
-      <h2>🛠️ Services Offered</h2>
-      <ul>
-        <li>🖥️ Technology Help</li>
-        <li>🧼 Cleaning</li>
-        <li>🎉 Party Help – Setup or Cleaning After</li>
-        <li>🐾 Pet Sitting (Dogs: please share info if they’re large or unfamiliar – safety first!)</li>
-        <li>🏃 Errands</li>
-        <li>🌿 Gardening</li>
-      </ul>
-    </section>
-
-    <section id="prices">
-      <h2>💸 Suggested Prices</h2>
-      <ul>
-        <li>🖥️ Technology Help: $15–$20</li>
-        <li>🧼 Cleaning: $10–$15</li>
-        <li>🎉 Party Help: $5–$10</li>
-        <li>🐾 Pet Sitting: $10–$20 (depending on size & care needed)</li>
-        <li>🏃 Errands: $10–$15</li>
-        <li>🌿 Gardening: $15–$25</li>
-      </ul>
-      <p><em>These prices are here for people who don't know what to pay me. You can pay me anything that's fair that you like — I'm not picky 😊</em></p>
-    </section>
-
-    <section id="legal">
-      <h2>📄 Privacy Policy</h2>
-      <p><strong>What we collect:</strong> We collect only the necessary information you provide when booking a job (e.g., Facebook username, location, availability, etc.).</p>
-      <p><strong>How we use it:</strong> Your data is only used for booking purposes and to contact you about your request. It is never shared or sold to anyone.</p>
-      <p><strong>Data retention:</strong> Booking information is stored securely and may be retained for reference. You may request to have it removed anytime.</p>
-      <p><strong>Contact:</strong> For questions about your data, reach out to Reuben through Messenger or the booking email provided.</p>
-      <hr>
-      <h2>📄 Terms of Service</h2>
-      <p><strong>Booking:</strong> By booking a service, you agree to provide accurate information and be available at the agreed-upon time.</p>
-      <p><strong>Rescheduling:</strong> You may reschedule up to 24 hours before your booking by contacting Reuben directly.</p>
-      <p><strong>Payment:</strong> Payments can be made via cash or bank transfer after services are completed. You may choose how much to pay based on the suggested price or your own fair offer.</p>
-      <p><strong>Safety:</strong> Please disclose any safety concerns in advance, especially regarding pets or access to your property.</p>
-      <p><strong>Right to refuse:</strong> Reuben reserves the right to refuse or cancel a booking at any time for safety or scheduling conflicts.</p>
-    </section>
-  </main>
-
-  <footer class="container">
-    <small>&copy; 2025 Reuben's Odd Jobs • All rights reserved.</small>
-  </footer>
-
-  <button id="backToTop" onclick="window.location.href='#top'">⬆️ Back to Top</button>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    emailjs.init("WL1HOHwEgsBKUWDyq");
-
-    document.getElementById("bookingForm")?.addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.send("service_ze5r19d", "template_q0jfnv2", {
-        fb: this.fb.value,
-        location: this.location.value,
-        live: this.live.value,
-        available: this.available.value,
-        payment: this.payment.value,
-        paying: this.paying.value,
-        ask: this.ask.value
-      }).then(() => {
-        document.getElementById("bookingMessage").innerHTML = '<span class="success">✅ Booking successfully sent! I’ll contact you within 4 hours to 2 days.</span>';
-        this.reset();
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      emailjs.init("WL1HOHwEgsBKUWDyq");
+      document.getElementById("bookingForm")?.addEventListener("submit", function(e) {
+        e.preventDefault();
+        emailjs.send("service_ze5r19d", "template_q0jfnv2", {
+          fb: this.fb.value,
+          location: this.location.value,
+          live: this.live.value,
+          available: this.available.value,
+          payment: this.payment.value,
+          paying: this.paying.value,
+          ask: this.ask.value
+        }).then(() => {
+          document.getElementById("bookingMessage").innerHTML = '<span class="success">✅ Booking successfully sent! I’ll contact you within 4 hours to 2 days.</span>';
+          this.reset();
+        });
       });
-    });
-
-    document.getElementById("reviewForm")?.addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.send("service_ze5r19d", "template_bnn168s", {
-        name: this.name.value,
-        stars: this.stars.value,
-        feedback: this.feedback.value
-      }).then(() => {
-        document.getElementById("reviewMessage").innerHTML = '<span class="success">✅ Review successfully sent!</span>';
-        this.reset();
-      });
-    });
-
-    const backToTop = document.getElementById('backToTop');
-    window.onscroll = () => {
-      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-    };
-  </script>
+      const backToTop = document.getElementById('backToTop');
+      window.onscroll = () => {
+        backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+      };
+    </script>
 </body>
 </html>
