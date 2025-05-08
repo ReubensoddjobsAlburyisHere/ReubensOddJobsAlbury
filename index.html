@@ -1,309 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reuben's Odd Jobs</title>
-  <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <style>
-    body {
-      background: black url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-    }
-    nav, main, footer, section {
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .btn-container {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    #backToTop {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      display: none;
-      padding: 0.6rem 1rem;
-      font-size: 1rem;
-      background: #fff;
-      color: #000;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 999;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    #careers-embed {
-      width: 100%;
-      height: 600px; /* Adjust height as needed */
-      border: 0;
-      border-radius: 10px;
-    }
-    #google_translate_element {
-      margin-top: 0.5rem;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reuben's Odd Jobs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding-top: 20vh;
+            font-family: sans-serif; /* Added a default font for better readability */
+        }
+        h2, h3, p {
+            color: #fff;
+        }
+        nav, footer, input, button, form {
+            display: none;
+        }
+        .progress-container {
+            background-color: #333;
+            height: 30px; /* Increased height to accommodate text */
+            width: 80%;
+            margin: 20px auto;
+            border-radius: 5px;
+            position: relative; /* Needed for absolute positioning of the indicator and text */
+            overflow: hidden;
+        }
+        .progress-indicator {
+            background-color: #fff;
+            height: 100%;
+            width: 30%;
+            border-radius: 5px;
+            animation: progress 2s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000; /* Make text visible on the white indicator */
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+    </style>
 </head>
 <body>
-  <a id="top"></a>
-  <nav class="container-fluid">
-    <ul>
-      <li><strong>Reuben's Odd Jobs</strong></li>
-    </ul>
-    <ul>
-      <li><a href="#booking">📋 Book</a></li>
-      <li><a href="#review">🌟 Reviews</a></li>
-      <li><a href="#faq">❓ FAQ</a></li>
-      <li><a href="#services">🛠️ Services</a></li>
-      <li><a href="#prices">💸 Prices</a></li>
-      <li><a href="#hours">⏰ Hours</a></li>
-      <li><a href="#careers">💼 Careers</a></li>
-    </ul>
-  </nav>
-
-  <main class="container">
-    <div id="google_translate_element"></div>
-
-    <section id="booking">
-      <h2>📋 Book a Job</h2>
-      <form id="bookingForm">
-        <label>🛠️ What service do you need?
-          <select name="service" required>
-            <option value="">Choose a service</option>
-            <option value="Technology Help">🖥️ Technology Help</option>
-            <option value="Cleaning">🧼 Cleaning</option>
-            <option value="Party Help">🎉 Party Help – Setup or Cleaning After</option>
-            <option value="Pet Sitting">🐾 Pet Sitting (Dogs: please share info if they’re large or unfamiliar – safety first!)</option>
-            <option value="Errands">🏃 Errands</option>
-            <option value="Gardening">🌿 Gardening</option>
-            <option value="Senior Assistance">🧑‍⚕️ Senior Assistance (e.g., light help around the house, companionship)</option>
-            <option value="House Sitting">🏡 House Sitting (including plant care, mail collection)</option>
-          </select>
-        </label>
-        <label>📅 Availability Date and Time
-          <input type="text" name="available" id="datetimepicker" required placeholder="Select date and time">
-        </label>
-        <label>📘 Facebook Username
-          <input type="text" name="fb" required placeholder="e.g. reuben.services">
-        </label>
-        <label>📍 Where are you?
-          <select name="location" required>
-            <option>East Albury</option>
-            <option>Glenroy</option>
-            <option>Lavington</option>
-            <option>North Albury</option>
-            <option>South Albury</option>
-            <option>Springdale Heights</option>
-            <option>Thurgoona</option>
-            <option>West Albury</option>
-          </select>
-        </label>
-        <label>🏠 Where do you live?
-          <input type="text" name="live" required>
-        </label>
-        <label>💰 Payment Type</label>
-        <input type="radio" name="payment" value="Bank Transfer" required> Bank Transfer
-        <input type="radio" name="payment" value="In Cash" required> In Cash
-        <label>💸 How much are you paying? (AUD)
-          <input type="number" name="paying" required>
-        </label>
-        <label>💬 Ask Reuben More (optional)
-          <textarea name="ask"></textarea>
-        </label>
-        <button type="submit">Submit Booking</button>
-        <p id="bookingMessage"></p>
-      </form>
-    </section>
-
-    <section id="review">
-      <h2>🌟 Leave a Review</h2>
-      <form id="reviewForm">
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-        <label for="stars">Star Rating (1–5):</label>
-        <select id="stars" name="stars" required>
-          <option value="">Choose a rating</option>
-          <option value="1">⭐ 1 - Not great</option>
-          <option value="2">⭐⭐ 2</option>
-          <option value="3">⭐⭐⭐ 3 - Okay</option>
-          <option value="4">⭐⭐⭐⭐ 4</option>
-          <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent!</option>
-        </select>
-        <textarea id="feedback" name="feedback" placeholder="Write your feedback here..." required></textarea>
-        <button type="submit">Submit Review</button>
-        <p id="reviewMessage"></p>
-      </form>
-    </section>
-
-    <section id="faq">
-      <h2>❓ Frequently Asked Questions</h2>
-      <ul>
-        <li><strong>How do I pay? 💰</strong> – Cash (AUD) or bank transfer after the job.</li>
-        <li><strong>What areas do you cover? 📍</strong> – Albury + surrounding suburbs.</li>
-        <li><strong>Can I book short notice? ⚡</strong> – Absolutely, message Reuben on Facebook!</li>
-        <li><strong>What kind of services do you offer? 🛠️</strong> – See full list below under Services!</li>
-        <li><strong>What are your hours of operation? ⏰</strong> – Check the Opening Hours section!</li>
-        <li><strong>What happens if I need to reschedule? 🗓️➡️🗓️</strong> – Contact Reuben directly. You may reschedule up to 24 hours before your booking.</li>
-        <li><strong>What should I expect on the day of the booking? ➡️🏠</strong> – Reuben will arrive ready, based on the job. Please be home or leave clear instructions!</li>
-        <li><strong>How do I get in touch with Reuben? 📧</strong> – Message him on Facebook or use the contact email listed in your booking confirmation.</li>
-      </ul>
-    </section>
-
-    <section id="services">
-      <h2>🛠️ Services Offered</h2>
-      <ul>
-        <li>🖥️ Technology Help</li>
-        <li>🧼 Cleaning</li>
-        <li>🎉 Party Help – Setup or Cleaning After</li>
-        <li>🐾 Pet Sitting (Dogs: please share info if they’re large or unfamiliar – safety first!)</li>
-        <li>🏃 Errands</li>
-        <li>🌿 Gardening</li>
-        <li>🧑‍⚕️ Senior Assistance (e.g., light help around the house, companionship)</li>
-        <li>🏡 House Sitting (including plant care, mail collection)</li>
-      </ul>
-    </section>
-
-    <section id="prices">
-      <h2>💸 Suggested Prices (AUD)</h2>
-      <ul>
-        <li>🖥️ Technology Help: $15–$20</li>
-        <li>🧼 Cleaning: $10–$15</li>
-        <li>🎉 Party Help: $5–$10</li>
-        <li>🐾 Pet Sitting: $10–$20</li>
-        <li>🏃 Errands: $10–$15</li>
-        <li>🌿 Gardening: $15–$25</li>
-        <li>🧑‍⚕️ Senior Assistance: $20–$30</li>
-        <li>🏡 House Sitting: $25–$40 (depending on duration and tasks)</li>
-      </ul>
-      <p><em>These prices are here for people who don't know what to pay me. You can pay me anything that's fair that you like — I'm not picky 😊</em></p>
-    </section>
-
-    <section id="hours">
-      <h2>⏰ Opening Hours</h2>
-      <h3>During School Term:</h3>
-      <ul>
-        <li>Monday: 3:40 PM - 6:00 PM</li>
-        <li>Tuesday: Closed</li>
-        <li>Wednesday: Closed</li>
-        <li>Thursday: 3:40 PM - 6:00 PM</li>
-        <li>Friday: 3:40 PM - 6:00 PM</li>
-        <li>Saturday: 11:00 AM - 6:30 PM</li>
-        <li>Sunday: 11:30 AM - 6:30 PM</li>
-      </ul>
-      <h3>During School Holidays and Public Holidays:</h3>
-      <ul>
-        <li>Monday: 9:00 AM - 5:00 PM</li>
-        <li>Tuesday: Closed</li>
-        <li>Wednesday: 9:00 AM - 5:00 PM</li>
-        <li>Thursday: 9:00 AM - 5:00 PM</li>
-        <li>Friday: 9:00 AM - 5:00 PM</li>
-        <li>Saturday: 11:30 AM - 6:30 PM</li>
-        <li>Sunday: 11:30 AM - 6:30 PM</li>
-      </ul>
-    </section>
-
-    <section id="careers">
-      <h2>💼 Careers</h2>
-      <p>Are you looking for flexible work and enjoy helping people out? Reuben's Odd Jobs is always looking for reliable individuals to join our team! Please fill out the form below to express your interest:</p>
-      <iframe id="careers-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSfAR3800E6W75Ar6PUDh7T9wL2Z4TsGEipLB1RVI0Hr4Ja7Pg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" style="width:100%; height:600px;" scrolling="auto"></iframe>
-      <p>If you have any questions, feel free to email us at <a href="mailto:reubenoddjobsalbury@gmail.com">reubenoddjobsalbury@gmail.com</a>.</p>
-    </section>
-
-    <section id="roadblock">
-      <h2>🚧 Oops, We Hit a Roadblock!</h2>
-      <p>🚧 Sorry for the interruption! We're currently working hard behind the scenes to bring you some exciting improvements and fix a few little quirks. We appreciate your patience as we make things even better. We're planning to add that feature in our next update! ✨</p>
-      <p>Thanks for understanding,</p>
-      <p>Management</p>
-      <p>Reuben's Odd Jobs</p>
-    </section>
-
-    <section id="legal">
-      <h2>📄 Privacy Policy</h2>
-      <p><strong>What We Collect:</strong> Your name, Facebook username, location, email (if provided), availability, and any extra notes submitted through our forms.</p>
-      <p><strong>Why We Collect It:</strong> To ensure accurate bookings, provide quality service, and to follow up on inquiries or feedback.</p>
-      <p><strong>How It’s Used:</strong> We use your info only for Reuben’s Odd Jobs services. We will never sell, rent, or share your data with third parties.</p>
-      <p><strong>Data Security:</strong> Your data is securely handled through EmailJS, a trusted service for form submission. We don’t store your info in databases.</p>
-      <p><strong>Control Over Your Data:</strong> You can request to delete your data at any time by contacting Reuben directly via Messenger or through the booking confirmation email.</p>
-      <p><strong>Cookies:</strong> We do not use cookies. No tracking tech is installed on this site.</p>
-      <p><strong>Children’s Privacy:</strong> We do not knowingly collect data from anyone under 13 years old.</p>
-
-      <hr>
-      <h2>📄 Terms of Service</h2>
-      <p><strong>By using Reuben’s Odd Jobs, you agree to the following:</strong></p>
-      <ul>
-        <li>✅ Bookings must be accurate and truthful.</li>
-        <li>✅ Reschedules must be made with at least 24 hours’ notice.</li>
-        <li>✅ Payments must be made promptly after services are completed (in AUD).</li>
-        <li>✅ If you’re not home, clear access instructions must be provided.</li>
-        <li>✅ You are responsible for disclosing important info (like pets, alarms, etc.).</li>
-        <li>✅ You must treat Reuben with respect and fairness (as he will do the same!).</li>
-        <li>⚠️ Abusive behavior, false bookings, or repeated no-shows may result in refusal of future service.</li>
-        <li>⚠️ Reuben reserves the right to refuse or cancel a booking if safety or other concerns arise.</li>
-        <li>🚧 Prices are suggested only – you're welcome to offer what you think is fair (in AUD).</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="container">
-    <small>&copy; 2025 Reuben's Odd Jobs • All rights reserved.</small>
-  </footer>
-
-  <button id="backToTop" onclick="window.location.href='#top'">⬆️ Back to Top</button>
-
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script>
-    flatpickr("#datetimepicker", {
-      enableTime: true,
-      dateFormat: "Y-m-d H:i",
-    });
-
-    emailjs.init("WL1HOHwEgsBKUWDyq");
-
-    document.getElementById("bookingForm")?.addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.send("service_ze5r19d", "template_q0jfnv2", {
-        service: this.service.value,
-        available: this.available.value,
-        fb: this.fb.value,
-        location: this.location.value,
-        live: this.live.value,
-        payment: this.payment.value,
-        paying: this.paying.value,
-        ask: this.ask.value
-      }).then(() => {
-        document.getElementById("bookingMessage").innerHTML = '<span class="success">✅ Booking successfully sent! I’ll contact you within 4 hours to 2 days.</span>';
-        this.reset();
-      });
-    });
-
-    document.getElementById("reviewForm")?.addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.send("service_ze5r19d", "template_bnn168s", {
-        name: this.name.value,
-        stars: this.stars.value,
-        feedback: this.feedback.value
-      }).then(() => {
-        document.getElementById("reviewMessage").innerHTML = '<span class="success">✅ Review successfully sent!</span>';
-        this.reset();
-      });
-    });
-
-    const backToTop = document.getElementById('backToTop');
-    window.onscroll = () => {
-      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-    };
-  </script>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Website Temporarily Unavailable 🛠️</h2>
+                    <h3>Reuben's Odd Jobs is currently undergoing an update. ⚙️</h3>
+                </hgroup>
+                <p>Please check back again soon. ⏳</p>
+                <div class="progress-container">
+                    <div class="progress-indicator">
+                        <span class="progress-text">0%</span>
+                    </div>
+                </div>
+                <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
+            </section>
+        </div>
+    </main>
 </body>
 </html>
