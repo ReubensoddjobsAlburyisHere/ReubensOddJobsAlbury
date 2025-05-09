@@ -10,8 +10,8 @@
             background-color: #000;
             color: #fff;
             text-align: center;
-            padding-top: 20vh;
-            font-family: sans-serif; /* Added a default font for better readability */
+            padding-top: 15vh; /* Adjust padding to make space for the dropdown */
+            font-family: sans-serif;
         }
         h2, h3, p {
             color: #fff;
@@ -21,11 +21,11 @@
         }
         .progress-container {
             background-color: #333;
-            height: 30px; /* Increased height to accommodate text */
+            height: 30px;
             width: 80%;
             margin: 20px auto;
             border-radius: 5px;
-            position: relative; /* Needed for absolute positioning of the indicator and text */
+            position: relative;
             overflow: hidden;
         }
         .progress-indicator {
@@ -37,14 +37,14 @@
             position: absolute;
             top: 0;
             left: 0;
-            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+            box-sizing: border-box;
         }
         .progress-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #000; /* Make text visible on the white indicator */
+            color: #000;
             font-size: 0.9rem;
             font-weight: bold;
         }
@@ -52,9 +52,53 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(300%); }
         }
+        #google_translate_element {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        /* Style the Google Translate dropdown to be more visible */
+        .goog-te-combo {
+            color: #000; /* Text color */
+            background-color: #eee; /* Background color */
+            border: 1px solid #777; /* Border */
+            padding: 5px; /* Padding */
+            border-radius: 3px; /* Rounded corners */
+            font-size: 0.9rem; /* Adjust font size */
+        }
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0px !important;
+            *border: 1px solid #ccc !important; /* IE6 and IE7 */
+            font-size: 10pt;
+            display: inline-block;
+            cursor: pointer;
+            zoom: 1;
+            *display: inline; /* IE */
+        }
+        .goog-te-gadget-icon {
+            display: none !important;
+        }
+        .goog-te-gadget-text {
+            color: #fff !important;
+        }
+        a.goog-te-button {
+            display: none !important;
+        }
+        a.goog-te-menu-link {
+            color: #000 !important;
+        }
+        div.goog-te-gadget {
+            color: #fff !important;
+        }
+        div.goog-te-gadget-icon {
+            background: url(//translate.google.com/images/flags.gif) no-repeat scroll 0 0 transparent !important;
+        }
     </style>
 </head>
 <body>
+    <div id="google_translate_element"></div>
     <main class="container">
         <div class="grid">
             <section>
@@ -65,12 +109,22 @@
                 <p>Please check back again soon. ⏳</p>
                 <div class="progress-container">
                     <div class="progress-indicator">
-                        <span class="progress-text">0%</span>
+                        <span class="progress-text">35%</span>
                     </div>
                 </div>
                 <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
             </section>
         </div>
     </main>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
