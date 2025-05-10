@@ -1,121 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reuben's Odd Jobs</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-      padding-top: 15vh;
-      font-family: sans-serif;
-    }
-    h2, h3, p {
-      color: #fff;
-    }
-    nav, footer, input, form {
-      display: none;
-    }
-    .progress-container {
-      background-color: #333;
-      height: 30px;
-      width: 80%;
-      margin: 20px auto;
-      border-radius: 5px;
-      position: relative;
-      overflow: hidden;
-    }
-    .progress-indicator {
-      background-color: #fff;
-      height: 100%;
-      width: 30%;
-      border-radius: 5px;
-      animation: progress 2s linear infinite;
-      position: absolute;
-      top: 0;
-      left: 0;
-      box-sizing: border-box;
-    }
-    .progress-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #000;
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-    @keyframes progress {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(300%); }
-    }
-    #google_translate_element {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-    #muteButton {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 1000;
-      padding: 0.5rem 1rem;
-      background-color: #000;
-      color: #fff;
-      border: 1px solid #fff;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reuben's Odd Jobs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding-top: 20vh;
+            font-family: sans-serif; /* Added a default font for better readability */
+        }
+        h2, h3, p {
+            color: #fff;
+        }
+        nav, footer, input, button, form {
+            display: none;
+        }
+        .progress-container {
+            background-color: #333;
+            height: 30px; /* Increased height to accommodate text */
+            width: 80%;
+            margin: 20px auto;
+            border-radius: 5px;
+            position: relative; /* Needed for absolute positioning of the indicator and text */
+            overflow: hidden;
+        }
+        .progress-indicator {
+            background-color: #fff;
+            height: 100%;
+            width: 30%;
+            border-radius: 5px;
+            animation: progress 2s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000; /* Make text visible on the white indicator */
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+    </style>
 </head>
 <body>
-  <div id="google_translate_element"></div>
-  <button id="muteButton">Mute 🔇</button>
-
-  <main class="container">
-    <div class="grid">
-      <section>
-        <hgroup>
-          <h2>Website Temporarily Unavailable 🛠️</h2>
-          <h3>Reuben's Odd Jobs is currently undergoing an update. ⚙️</h3>
-        </hgroup>
-        <p>Please check back again soon. ⏳</p>
-        <div class="progress-container">
-          <div class="progress-indicator">
-            <span class="progress-text">50%</span>
-          </div>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Website Temporarily Unavailable 🛠️</h2>
+                    <h3>Reuben's Odd Jobs is currently undergoing an update. ⚙️</h3>
+                </hgroup>
+                <p>Please check back again soon. ⏳</p>
+                <div class="progress-container">
+                    <div class="progress-indicator">
+                        <span class="progress-text">10%</span>
+                    </div>
+                </div>
+                <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
+            </section>
         </div>
-        <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="mailto:reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
-      </section>
-    </div>
-  </main>
-
-  <!-- Background Music -->
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="https://files.catbox.moe/98txr9.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement(
-        { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
-        'google_translate_element'
-      );
-    }
-
-    const audio = document.getElementById("backgroundMusic");
-    const muteButton = document.getElementById("muteButton");
-
-    muteButton.addEventListener("click", () => {
-      audio.muted = !audio.muted;
-      muteButton.textContent = audio.muted ? "Unmute 🔊" : "Mute 🔇";
-    });
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </main>
+</body>
+</html>website for downtime with 10%  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reuben's Odd Jobs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding-top: 20vh;
+            font-family: sans-serif; /* Added a default font for better readability */
+        }
+        h2, h3, p {
+            color: #fff;
+        }
+        nav, footer, input, button, form {
+            display: none;
+        }
+        .progress-container {
+            background-color: #333;
+            height: 30px; /* Increased height to accommodate text */
+            width: 80%;
+            margin: 20px auto;
+            border-radius: 5px;
+            position: relative; /* Needed for absolute positioning of the indicator and text */
+            overflow: hidden;
+        }
+        .progress-indicator {
+            background-color: #fff;
+            height: 100%;
+            width: 30%;
+            border-radius: 5px;
+            animation: progress 2s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000; /* Make text visible on the white indicator */
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Website Temporarily Unavailable 🛠️</h2>
+                    <h3>Reuben's Odd Jobs is currently undergoing an update. ⚙️</h3>
+                </hgroup>
+                <p>Please check back again soon. ⏳</p>
+                <div class="progress-container">
+                    <div class="progress-indicator">
+                        <span class="progress-text">90%</span>
+                    </div>
+                </div>
+                <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
+            </section>
+        </div>
+    </main>
 </body>
 </html>
