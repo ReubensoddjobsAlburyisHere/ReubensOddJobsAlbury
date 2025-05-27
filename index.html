@@ -12,6 +12,7 @@
             text-align: center;
             padding-top: 15vh; /* Adjust padding to make space for the dropdown */
             font-family: sans-serif;
+            overflow: hidden; /* Prevent scrollbar during animation */
         }
         h2, h3, p {
             color: #fff;
@@ -20,37 +21,7 @@
             display: none;
         }
         .progress-container {
-            background-color: #333;
-            height: 30px;
-            width: 80%;
-            margin: 20px auto;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
-        }
-        .progress-indicator {
-            background-color: #fff;
-            height: 100%;
-            width: 30%;
-            border-radius: 5px;
-            animation: progress 2s linear infinite;
-            position: absolute;
-            top: 0;
-            left: 0;
-            box-sizing: border-box;
-        }
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #000;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-        @keyframes progress {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(300%); }
+            display: none; /* Hide the progress bar as the site is discontinued, not updating */
         }
         #google_translate_element {
             position: absolute;
@@ -95,19 +66,36 @@
         div.goog-te-gadget-icon {
             background: url(//translate.google.com/images/flags.gif) no-repeat scroll 0 0 transparent !important;
         }
+
+        /* Animation for the main content */
+        .fade-in {
+            animation: fadeIn 2s ease-out forwards;
+            opacity: 0; /* Start invisible */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Start slightly below */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
     <div id="google_translate_element"></div>
     <main class="container">
         <div class="grid">
-            <section>
-                <hgroup>
-                    <h2>Important Update Regarding Reuben's Odd Jobs 👋</h2>
+            <section class="fade-in"> <hgroup>
+                    <h2>Website is Now Discontinued</h2>
+                    <h3>Important Update Regarding Reuben's Odd Jobs 👋</h3>
                 </hgroup>
                 <p>Hello everyone! 😊</p>
                 <p>Following recent times, I wanted to let you all know that Reuben's Odd Jobs will be discontinued. 😔 Sadly, we haven't been getting enough consistent work lately to keep things running smoothly 📉, and it's time for a change.</p>
-                <p>I'm now focusing my efforts on a different Facebook page: <a href="https://www.facebook.com/share/1BfVocMRKc/" style="color: #fff;">[New Facebook Page] ✨👍</a>. If you'd like to see what I'm working on next and stay connected, please head over and give that page a follow if you like to! 😄</p>
+                <p>I'm now focusing my efforts on a different Facebook page: <a href="https://www.facebook.com/share/1BfVocMRKc/" style="color: #fff;">Global News Weekly 👍</a> If you'd like to see what I'm working on next and stay connected, please head over and give that page a follow if you like to! 😄</p>
                 <p>Thank you so much to everyone who has supported Reuben's Odd Jobs over time! 🙏 Your support meant a lot! ❤️</p>
                 <p>Wishing you all the very best! 🌟 Take care! 👋</p>
                 <p>Kind regards,</p>
@@ -128,5 +116,3 @@
 </body>
 </html>
 
-I've updated the content within the <main> tags with the message you provided and linked the new Facebook page. I've also kept the "Website Temporarily Unavailable" heading but you can easily change that to something like "Important Update" if you prefer. Let me know what you think! 😊
- 
